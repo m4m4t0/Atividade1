@@ -1,5 +1,5 @@
-#ifndef RANDARRAY10_H
-#define RANDARRAY10_H
+#ifndef RANDARRAY1_H
+#define RANDARRAY1_H
 
 double* randArray1(int n);
 
