@@ -1,64 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include "randArray1.h"
+#include "randArray10.h"
+#include "randArray100.h"
 
-double* randArray1 (int n) {
-    srand48(time(NULL));
-
-    double* vetor = (double*)malloc(sizeof(double) * n);
-
-    if (vetor == NULL) {
-        printf("nao foi possivel");
-        exit(-1);
-    }
-
-    for (int i = 0; i < n; i++) {
-        vetor[i] = drand48();
-    }
-
-    return vetor;
-}
-
-double* randArray10 (int n) {
-    srand48(time(NULL));
-    double min = 0.0;
-    double max = 10.0; 
-
-    double* vetor = (double*)malloc(sizeof(double) * n);
-
-    if (vetor == NULL) {
-        printf("nao foi possivel");
-        exit(-1);
-    }
-
-    for (int i = 0; i < n; i++) {
-        vetor[i] = min + drand48() * (max-min);
-    }
-
-    return vetor;
-}
-
-double* randArray100 (int n) {
-    srand48(time(NULL));
-
-    double min = 0;
-    double max = 100;
-
-    double* vetor = (double*)malloc(sizeof(double) * n);
-
-    if (vetor == NULL) {
-        printf("nao foi possivel");
-        exit(-1);
-    }
-
-    for (int i = 0; i < n; i++) {
-        vetor[i] = min + drand48() * (max - min);
-    }
-
-    return vetor;
-}
-
-int main() {
+void main() {
     int n[3];
 
     for (int k = 0; k < 3; k++) {
@@ -90,5 +36,5 @@ int main() {
     free(b);
     free(c);
 
-    return 0;
+    return;
 }
