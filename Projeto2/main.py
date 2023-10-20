@@ -1,5 +1,5 @@
 import hashlib
-
+# criação de tipos de erro para usá-los com "raise" dependendo do tratamento desejado.
 class ErroNomeMenor(Exception):
     def __init__(self):
         super().__init__()
@@ -28,18 +28,20 @@ class Usuario:
         
         self.senha_hash = self.senha_em_hash(senha)
 
+        # testa se a variável nivel pode ser convertida em int, senão chama o erro equivalente
         try:
             nivel = int(nivel)
-
         except ValueError:
             raise ErroNivelNotInt
         
+        # avalia se a variável "nível" está de acordo com o esperado
         if self.nivel_valido(nivel):
             self.nivel = nivel
 
-
+    # método de classe para verificar se a variável "usuário" é válida
     def usuario_valido(self, nome):
-        # verifica se o nome de usuário escolhido é válido
+        # verifica se o nome de usuário tem 6 ou mais caracteres e se tem espaços na string,
+        # caso tenha chama o erro específico para esse caso
         if (len(nome) < 6):
             raise ErroNomeMenor
         elif (' ' in nome):
@@ -55,7 +57,7 @@ class Usuario:
         return senha_sha256.hexdigest()
     
     def verificar_senha_usuario(self, senha, usuario):
-        # verifica se o usuário e senhas digitados estão corretos
+        # verifica se o usuário e senhas digitados estão corretos, caso não estajam chama o erro equivalente
         if (self.senha_hash == self.senha_em_hash(senha) and self.nome == usuario):
             print('\nLogin efetuado com sucesso!')
         else:
@@ -68,6 +70,7 @@ class Usuario:
         else:
             print(f'Acesso negado para usuários de nível {self.nivel}.')
 
+    # verifica se o nível digitado é aceito
     def nivel_valido(self, nivel):
         if (not isinstance(nivel, int)):
             raise ErroNivelNotInt
@@ -85,6 +88,8 @@ nivel = input("Digite o nível de usuário de 1 a 3, sendo 3 o nível mais alto 
 print('\nAguarde...')
 
 while (1):
+    # tenta inicializar a variável como um objeto do tipo "Usuario", caso algum erro ocorra é feito o 
+    # tratamento e se nenhum erro ocorrer o loop é quebrado
     try:
         dados = Usuario(usuario, senha, nivel)
         break
@@ -105,6 +110,7 @@ print('Cadastro efetuado com sucesso!\nEfetue seu primeiro login.\n')
 input_usuario = str(input("Digite o nome de usuário: "))
 input_senha = str(input("Digite a senha de usuário: "))
 
+# mesmo raciocínio do loop anterior
 while(1):
     try:
         dados.verificar_senha_usuario(input_senha, input_usuario)
